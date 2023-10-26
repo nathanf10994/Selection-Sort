@@ -21,10 +21,8 @@ int main(){
 		for(int i=0; i<tam; i++){
 			cout<<"\nInforme o valor "<<i+1<<" para o vetor ->";
 			cin>>vetor[i];
+			vetorCopia[i] = vetor[i]; //Armazenar a ordenação original
 		}
-	
-	//Armazenamento da ordenaçãoo original
-	vetorCopia = vetor;
 		
 	system("cls");
 	
