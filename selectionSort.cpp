@@ -15,17 +15,22 @@ void selectionSort(lista *l, lista *c){
 				}
 				if(menor != atual){ //verifica se há necessidade para os próximos passos
 					
-						menor->anterior->proximo = atual; //atualiza��o dos nodos anteriores e próximos aos nodos que mudarão de posição
+						nodo *tempAnterior = menor->anterior;
+						nodo *tempProximo = atual->proximo;
+						atual->proximo = menor->proximo;
+						menor->anterior = atual->anterior;
 							if(atual->anterior) atual->anterior->proximo = menor;
 							if(menor->proximo) menor->proximo->anterior = atual;
-						atual->proximo->anterior = menor;
-					
-					nodo *tempAnterior = atual->anterior; //atualização dos nodos que mudarão de posição
-					nodo *tempProximo = atual->proximo;
-					atual->anterior = menor->anterior;
-					atual->proximo = menor->proximo;
-					menor->anterior = tempAnterior;
-					menor->proximo = tempProximo;
+							
+							if(tempAnterior == atual){ //verifica se atual e menor são sequenciais
+								atual->anterior = menor;
+								menor->proximo = atual;
+							} else {
+								atual->anterior = tempAnterior;
+								menor->proximo = tempProximo;
+								tempAnterior->proximo = atual;
+								tempProximo->anterior = menor;
+							}
 						
 						if(l->primeiro == atual) l->primeiro = menor; //Atualiza o início da lista
 					
